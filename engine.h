@@ -136,7 +136,7 @@ public:
 			}
 		}
 
-		engineObject(const SDL_FRect& hull, SDL_Texture* tex, double rot = 0,
+		engineObject(const SDL_FRect& hull = {0, 0, 100, 100}, SDL_Texture* tex = NULL, double rot = 0,
 			bool centered = true, SDL_FlipMode flip = SDL_FLIP_NONE, float scale = 1.0,
 			int depth = 0)
 			: hull(hull), tex(tex), rot(rot),

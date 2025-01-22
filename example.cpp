@@ -1,9 +1,9 @@
 #include "engine.h"
-#include "example.h"
+#include "particleMan.h"
 #include <string>
 
 //EXAMPLE CODE
-std::vector<std::shared_ptr<Example::velObject>> objs;
+/*std::vector<std::shared_ptr<Example::velObject>> objs;
 
 
 //ENGINE OBJECTS FUNCS
@@ -116,7 +116,7 @@ void moveToMouse(std::shared_ptr<Engine::engineObject> obj)
 	obj->hull.x = Engine::mousePos.x;
 	obj->hull.y = Engine::mousePos.y;
 }
-
+*/
 void engineControls()
 {
 	if (Engine::keyStates[SDL_SCANCODE_ESCAPE])
@@ -146,7 +146,8 @@ void engineControls()
 		else
 			Engine::engineState = Engine::STATE_DEFAULT;
 	}
-	if (Engine::keyStates[SDL_SCANCODE_P] == 1)
+}
+/*	if (Engine::keyStates[SDL_SCANCODE_P] == 1)
 	{
 		printf("Object count: %i\n", objs.size());
 	}
@@ -226,7 +227,7 @@ void exampleInit()
 
 }
 //EXAMPLE CODE END
-
+*/
 
 int main(int argc, char* argv[])
 {
@@ -234,7 +235,7 @@ int main(int argc, char* argv[])
 	Engine::initEngine();
 
 	//Initialize modules
-	exampleInit();
+	ParticleMan::initParticle();
 
 	while (!Engine::quit) {
 		//Process input

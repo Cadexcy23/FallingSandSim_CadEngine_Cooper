@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\SDL\SDL3-3.1.6\include;D:\SDL\SDL3-pack-x64\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\SDL\SDL3-3.1.6\lib\x64;D:\SDL\SDL3-pack-x64\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\Data\Media\Resources - Coding\Repos\SDL3-3.1.6\include;E:\Data\Media\Resources - Coding\Repos\SDL3-CooperPack\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Data\Media\Resources - Coding\Repos\SDL3-3.1.6\lib;E:\Data\Media\Resources - Coding\Repos\SDL3-CooperPack\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\SDL\SDL3-3.1.6\include;D:\SDL\SDL3-pack-x64\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\SDL\SDL3-3.1.6\lib\x64;D:\SDL\SDL3-pack-x64\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\Data\Media\Resources - Coding\Repos\SDL3-3.1.6\include;E:\Data\Media\Resources - Coding\Repos\SDL3-CooperPack\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Data\Media\Resources - Coding\Repos\SDL3-3.1.6\lib;E:\Data\Media\Resources - Coding\Repos\SDL3-CooperPack\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -139,10 +139,12 @@
   <ItemGroup>
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="example.cpp" />
+    <ClCompile Include="particleMan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h" />
     <ClInclude Include="example.h" />
+    <ClInclude Include="particleMan.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

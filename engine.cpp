@@ -22,10 +22,10 @@ bool Engine::quit = false;
 bool Engine::showFPS = false;
 Uint32 Engine::debugLevel = 0;
 int Engine::engineState = STATE_DEFAULT;
-SDL_Point Engine::baseRes = { 1920 / 1, 1080 / 1 };
+SDL_Point Engine::baseRes = { 1920 / 10, 1080 / 10 };
 SDL_Point Engine::windowRes = { 1920 / 2, 1080 / 2 };
 SDL_FPoint Engine::resScale = { float(Engine::baseRes.x) / float(Engine::windowRes.x), float(Engine::baseRes.y) / float(Engine::windowRes.y) };
-SDL_ScaleMode Engine::scaleMode = SDL_SCALEMODE_LINEAR;
+SDL_ScaleMode Engine::scaleMode = SDL_SCALEMODE_NEAREST;
 SDL_FPoint Engine::mousePos = { 0, 0 };
 std::vector<int> Engine::mouseStates;
 std::vector<int> Engine::keyStates;
@@ -175,11 +175,14 @@ void Engine::drawLine(SDL_FPoint start, SDL_FPoint end, SDL_Color color)
 
 void Engine::drawRect(SDL_FRect rect, SDL_Color color, bool fill)
 {
+	Uint8 r, g, b, a;
+	SDL_GetRenderDrawColor(renderer, &r, &g, &b, &a);
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 	if (fill)
 		SDL_RenderFillRect(renderer, &rect);
 	else
 		SDL_RenderRect(renderer, &rect);
+	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }
 
 void Engine::drawTex(SDL_Texture* tex, SDL_FRect rect, double rot, bool center, SDL_FlipMode flip, float scale, SDL_FRect* chunk)
