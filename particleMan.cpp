@@ -7,51 +7,13 @@ std::shared_ptr <Engine::engineObject> controller;
 void gravity(std::shared_ptr<Engine::engineObject> obj) {
 	auto particleObj = std::dynamic_pointer_cast<ParticleMan::particleObject>(obj);
 
-	std::vector<int> checkDirections; //Create Empty List of Directions
-	checkDirections.push_back(4); //Add Down to Directions List
-	checkDirections.push_back(3); //Add Down Left
-	checkDirections.push_back(5); //Add Down Right
+	std::vector<SDL_FPoint> checkDirections; //Create Empty List of Directions
+	checkDirections.push_back({ 0, 1 }); //Add Down to Directions List
+	checkDirections.push_back({ 1, 1 }); //Add Down Left
+	checkDirections.push_back({ -1, 1 }); //Add Down Right
 	for (int i = 0; i < checkDirections.size(); i++) { //For Each Item in Direction List
-		if(particleObj->unoccupiedSpace(checkDirections[i])) {
-
-			SDL_FPoint occupancyCheck = { particleObj->hull.x, particleObj->hull.y };
-			//Convert from Direction to Change in [x,y]
-			switch (checkDirections[i]) {
-			case 0: //Up
-				occupancyCheck.y--;
-				break;
-			case 1: //Up Right
-				occupancyCheck.x++;
-				occupancyCheck.y--;
-				break;
-			case 2: //Right
-				occupancyCheck.x++;
-				break;
-			case 3: //Down Right
-				occupancyCheck.x++;
-				occupancyCheck.y++;
-				break;
-			case 4: //Down
-				occupancyCheck.y++;
-				break;
-			case 5: //Down Left
-				occupancyCheck.x--;
-				occupancyCheck.y++;
-				break;
-			case 6: //Left
-				occupancyCheck.x--;
-				break;
-			case 7: //Up Left
-				occupancyCheck.x--;
-				occupancyCheck.y--;
-				break;
-			}
-			//Adjust Particle Position
-			ParticleMan::particleGrid[obj->hull.x][obj->hull.y] = false; //Particle Free
-			obj->hull.x = occupancyCheck.x;
-			obj->hull.y = occupancyCheck.y;
-			ParticleMan::particleGrid[obj->hull.x][obj->hull.y] = true; //Particle Bind
-		}
+		if (particleObj->tryMove(checkDirections[i]))
+			return;
 	}
 }
 

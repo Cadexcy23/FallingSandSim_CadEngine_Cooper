@@ -9,48 +9,34 @@ public:
 	{
 		SDL_FPoint vel;
 
-		bool unoccupiedSpace(int direction) {
-			//Occupancy Check Origin
-			SDL_FPoint occupancyCheck = { hull.x, hull.y };
+		bool unoccupiedSpace(SDL_FPoint changePos) {
+			//Apply changePos to hull
+			SDL_FPoint checkPos = { hull.x + changePos.x, hull.y + changePos.y };
 
-			//Adjust Direction Checked
-			switch (direction) {
-			case 0: //Up
-				occupancyCheck.y--;
-				break;
-			case 1: //Up Right
-				occupancyCheck.x++;
-				occupancyCheck.y--;
-				break;
-			case 2: //Right
-				occupancyCheck.x++;
-				break;
-			case 3: //Down Right
-				occupancyCheck.x++;
-				occupancyCheck.y++;
-				break;
-			case 4: //Down
-				occupancyCheck.y++;
-				break;
-			case 5: //Down Left
-				occupancyCheck.x--;
-				occupancyCheck.y++;
-				break;
-			case 6: //Left
-				occupancyCheck.x--;
-				break;
-			case 7: //Up Left
-				occupancyCheck.x--;
-				occupancyCheck.y--;
-				break;
-			}
-			if (occupancyCheck.x < 0 ||
-				occupancyCheck.x >= Engine::baseRes.x ||
-				occupancyCheck.y < 0 ||
-				occupancyCheck.y >= Engine::baseRes.y) {
+			if (checkPos.x < 0 ||
+				checkPos.x >= Engine::baseRes.x ||
+				checkPos.y < 0 ||
+				checkPos.y >= Engine::baseRes.y) {
 				return false;
 			}
-				return !particleGrid[occupancyCheck.x][occupancyCheck.y];
+				return !particleGrid[checkPos.x][checkPos.y];
+		}
+
+		bool tryMove(SDL_FPoint changePos)
+		{
+			if (unoccupiedSpace(changePos))
+			{
+				SDL_FPoint newPos = { hull.x + changePos.x, hull.y + changePos.y };
+
+				//Adjust Particle Position
+				ParticleMan::particleGrid[hull.x][hull.y] = false; //Particle Free
+				hull.x = newPos.x;
+				hull.y = newPos.y;
+				ParticleMan::particleGrid[hull.x][hull.y] = true; //Particle Bind
+
+				return true;
+			}
+			return false;
 		}
 
 		particleObject(const SDL_FRect& hull = { 0, 0, 1, 1 }, double rot = 0,
